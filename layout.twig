@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="{{ settings.language | default('en') }}">
+	<head>
+		<meta charset="UTF-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<meta name="description" content="{{ metatabs.meta.description }}" />
+		<meta name="author" content="{{ metatabs.meta.author }}" />
+		<meta name="generator" content="TYPEMILL" />
+		<meta name="msapplication-TileColor" content="#F9F8F6" />
+		
+		{% if favicon %}
+			<meta name="msapplication-TileColor" content="#F9F8F6" />
+			<meta name="msapplication-TileImage" content="{{ base_url }}/media/files/favicon-144.png" />
+			<link rel="icon" type="image/png" href="{{ base_url }}/media/files/favicon-16.png" sizes="16x16" />
+			<link rel="icon" type="image/png" href="{{ base_url }}/media/files/favicon-32.png" sizes="32x32" />
+			<link rel="apple-touch-icon" sizes="72x72" href="{{ base_url }}/media/files/favicon-72.png" />
+			<link rel="apple-touch-icon" sizes="114x114" href="{{ base_url }}/media/files/favicon-114.png" />
+			<link rel="apple-touch-icon" sizes="144x144" href="{{ base_url }}/media/files/favicon-144.png" />
+			<link rel="apple-touch-icon" sizes="180x180" href="{{ base_url }}/media/files/favicon-180.png" />
+		{% endif %}
+		
+		<link rel="canonical" href="{{ item.urlAbs }}" />		
+		
+		<meta property="og:site_name" content="{{ settings.title }}">
+		<meta property="og:title" content="{{ title }}">
+		<meta property="og:description" content="{{ metatabs.meta.description }}">
+		<meta property="og:type" content="article">
+		<meta property="og:url" content="{{ item.urlAbs }}">
+		{% if image.img_url %}
+			<meta property="og:image" content="{{ image.img_url }}">
+			<meta name="twitter:image:alt" content="{{ image.img_alt }}">
+		{% endif %}
+		<meta name="twitter:card" content="summary_large_image">		
+
+		{% block stylesheets %}
+
+			<link rel="stylesheet" href="{{ base_url }}/themes/aboutme/css/style.css" />
+
+			{{ assets.renderCSS() }}
+			
+		{% endblock %}
+	</head>
+	<body class="bt bw5 b--primary ma0 dark sans-serif">
+		
+		<!-- JUST IN CASE YOU WANT TO USE SVG-ICONS, e.g. FROM ICOMOON -->
+		
+		<svg style="position: absolute; width: 0; height: 0; overflow: hidden" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+			<defs>
+				<symbol id="icon-link" viewBox="0 0 32 32">
+					<title>link</title>
+					<path d="M13.757 19.868c-0.416 0-0.832-0.159-1.149-0.476-2.973-2.973-2.973-7.81 0-10.783l6-6c1.44-1.44 3.355-2.233 5.392-2.233s3.951 0.793 5.392 2.233c2.973 2.973 2.973 7.81 0 10.783l-2.743 2.743c-0.635 0.635-1.663 0.635-2.298 0s-0.635-1.663 0-2.298l2.743-2.743c1.706-1.706 1.706-4.481 0-6.187-0.826-0.826-1.925-1.281-3.094-1.281s-2.267 0.455-3.094 1.281l-6 6c-1.706 1.706-1.706 4.481 0 6.187 0.635 0.635 0.635 1.663 0 2.298-0.317 0.317-0.733 0.476-1.149 0.476z"></path>
+					<path d="M8 31.625c-2.037 0-3.952-0.793-5.392-2.233-2.973-2.973-2.973-7.81 0-10.783l2.743-2.743c0.635-0.635 1.664-0.635 2.298 0s0.635 1.663 0 2.298l-2.743 2.743c-1.706 1.706-1.706 4.481 0 6.187 0.826 0.826 1.925 1.281 3.094 1.281s2.267-0.455 3.094-1.281l6-6c1.706-1.706 1.706-4.481 0-6.187-0.635-0.635-0.635-1.663 0-2.298s1.663-0.635 2.298 0c2.973 2.973 2.973 7.81 0 10.783l-6 6c-1.44 1.44-3.355 2.233-5.392 2.233z"></path>
+				</symbol>
+			</defs>
+		</svg>
+				
+		<header class="flex justify-between pr3 pl3 mw-800-l w-100 mauto-l">
+				
+			<div>
+				<p>
+					{% if logo %}
+						<a href="{{ base_url }}"><img src="{{ base_url }}/{{ logo }}" alt="Logo for {{settings.title}}" class="logo-image"/></a>
+					{% else %}
+						<a href="{{ base_url }}" class="{{ settings.themes.aboutme.logostyle | default('logo-pure') }}">{{ settings.themes.aboutme.logotext }}</a>
+					{% endif %}
+				</p>
+			</div>
+
+			<nav class="mainnav" aria-label="Menu">
+  				<!-- burger menu controlled by invisible checkbox -->
+  				<input type="checkbox" id="burger" class="dn">
+  				<label for="burger" class="burgerbutton">&#9776;</label>			
+				
+				<ul class="menu list">
+			    
+				    {% for element in navigation %}
+						
+				        {% if element.activeParent %}
+							<li class="{{ element.elementType }} active parent pa2 ma2">
+						{% elseif element.active %}
+							<li class="{{ element.elementType }} active pa2 ma2">
+						{% else %}
+							<li class="{{ element.elementType }} pa2 ma2">
+						{% endif %}
+								<a class="link dark hover-primary" href="{{ element.urlAbs }}">{{ element.name }}</a>
+				        	</li>
+				    {% endfor %}
+				
+				</ul>
+			</nav>
+			
+		</header>
+
+		{% block content %}{% endblock %}
+			
+		<footer class="dib bg-light w-100 fw-100">
+			
+			{% include 'partials/footer.twig' %}
+		
+		</footer>
+		
+		{% block javascripts %}
+			
+			<script src="{{ base_url }}/themes/aboutme/js/script.js"></script>
+
+			{{ assets.renderJS() }}
+		
+		{% endblock %}
+
+	</body>
+</html>

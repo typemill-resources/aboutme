@@ -1,0 +1,63 @@
+name: About Me
+version: 1.1.0
+description: About Me is a super minimal theme for your personal website. Focus on text and typography, high performance, lightweight and no JavaScript. 
+author: Trendschau
+homepage: https://trendschau.net
+licence: MIT
+paypal: https://paypal.me/typemill
+amount: 15
+
+forms:
+  fields:
+
+    logotext:
+      type: text
+      label: Add a text for your logo
+      description: You can also upload an image logo in the system settings
+    logostyle:
+      type: select
+      label: Select Logo-Style
+      description: You can also upload an image logo in the system settings
+      options:
+        logo-round: Round Text-Logo
+        logo-classic: Classic Text-Logo
+        logo-pure: Pure Text-Logo
+
+    fieldset1:
+      type: fieldset
+      legend: Content for Startpage
+      fields:
+        startpage:
+          type: checkbox
+          label: Individual Startpage
+          checkboxlabel: Use this content instead of editor content         
+        startbyline:
+          type: text
+          label: The byline
+        starttitle:
+          type: text
+          label: The title
+        startcontent:
+          type: textarea
+          label: The content (use markdown)
+
+    fieldset2:
+      type: fieldset
+      legend: Footer columns
+      fields:
+        footercolumns:
+          type: checkboxlist
+          label: Activate footer columns
+          options:
+            footer1: Column 1
+            footer2: Column 2
+            footer3: Column 3     
+        footer1:
+          type: textarea
+          label: footer column 1 (use markdown)
+        footer2:
+          type: textarea
+          label: footer column 2 (use markdown)
+        footer3:
+          type: textarea
+          label: footer column 3 (use markdown)

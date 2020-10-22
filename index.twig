@@ -1,0 +1,32 @@
+{% extends '/layout.twig' %}
+
+{% block title %}{{ metatabs.meta.title }} | {{ settings.title }}{% endblock %}
+
+{% block content %}
+
+	{% if home %}
+
+		<main class="font-lead lh-lead fw4 fw2-l mt5 mb5 pl3 pr3 w-100 mw-800-l mauto-l">
+			{% if settings.themes.aboutme.startpage %}
+				<p>{{ settings.themes.aboutme.startbyline }}</p>
+				<h1>{{ settings.themes.aboutme.starttitle }}</h1>
+				{{ markdown(settings.themes.aboutme.startcontent) }}
+			{% else %}
+				<h1>{{ title }}</h1>
+				{{ content }}
+			{% endif %}
+		</main>
+
+	{% elseif item.elementType == 'folder' %}
+		
+		<main class="mt5 mb5 pl3 pr3 w-100 mw-800-l mauto-l">
+			{% include 'folder.twig' %}
+		</main>
+
+	{% elseif item.elementType == 'file' %}
+		<main class="mt5 mb5 pl3 pr3 w-100 mw-800-l mauto-l">
+			{% include 'file.twig' %}
+		</main>
+	{% endif %}
+	
+{% endblock %}

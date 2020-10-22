@@ -1,0 +1,55 @@
+{% include 'partials/breadcrumb.twig' %}
+
+<article class="font-lead lh-lead fw4 fw1-l">
+
+	<header>
+		<h1>{{ title }}</h1>
+	</header> 
+
+	{{ content }}
+
+</article>
+
+
+<section class="font-copy lh-copy">
+	
+
+	{% if item.contains == 'pages' %}
+
+		<ol class="list pa0" reversed>
+
+			{% for element in item.folderContent %}
+
+				{% set page = getPageMeta(settings, element) %}
+
+				<li class="mt5-l">
+					<a href="{{ element.urlAbs }}"><h2>{{ page.meta.title }}</h2></a>
+					<p>{{ page.meta.description }}</p>
+				</li>
+ 
+			{% endfor %}
+
+		</ol>
+
+	{% elseif item.contains == 'posts' %}
+
+		<ol class="list pa0" reversed>
+
+			{% for element in item.folderContent %}
+
+				{% set post = getPageMeta(settings, element) %}
+				{% set date = element.order[0:4] ~ '-' ~ element.order[4:2] ~ '-' ~ element.order[6:2] %}
+
+				<li class="mt5-l">
+					<a href="{{ element.urlAbs }}"><h2>{{ post.meta.title }}</h2></a>
+					<small><time datetime="{{date}}">{{ date | date("d.m.Y") }}</time> | {{ post.meta.author }}</small>
+					<p>{{ post.meta.description }}</p>
+				</li>
+							
+			{% endfor %}
+			
+		</ol>
+
+	{% endif %}	
+
+</section>

@@ -1,0 +1,10 @@
+
+<div class="flex-l justify-between pr3 pl3 mw-800-l mauto-l mt4-l mb4-l">
+	{% for column,key in settings.themes.aboutme.footercolumns %}
+		{% if settings.themes.aboutme[column] %}
+			<div class="w-30-l">
+				{{ markdown(settings.themes.aboutme[column]) }}
+			</div>
+		{% endif %}
+	{% endfor %}
+</div>
